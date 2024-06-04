@@ -1,0 +1,974 @@
+{
+  "overview": {
+    "shortcuts": [],
+    "panels": [
+      "ImportStatus",
+      "ImportErrors"
+    ]
+  },
+  "globalGridsSearch": {
+    "active": true,
+    "text": "Enter text here to filter all grids on document number..."
+  },
+  "logGrid": {
+    "template": "Scheduled Import Activity Log",
+    "whereClause": "GroupRef='efd3449e-3a44-4c38-b0e7-f57ca48cf8b0'"
+  },
+  "importGrids": [
+    {
+      "id": "gridDocuments",
+      "title": "Documents",
+      "description": "Current content of the import table for Documents",
+      "tooltip": "Shows the current content of the import table for Documents",
+      "view": "lviw_Import_DTS_DCS_Documents",
+      "whereClause": "INTEGR_REC_GROUPREF='efd3449e-3a44-4c38-b0e7-f57ca48cf8b0'",
+      "mapIntegrRecStatusToImportStatus": true,
+      "includeInImportStatusPanel": true,
+      "includeInImportErrorsPanel": true,
+      "columns": [
+        {
+          "name": "PrimKey",
+          "caption": "PrimKey",
+          "type": "uniqueidentifier",
+          "width": "225px",
+          "hidden": true,
+          "excludeFromFilter": true
+        },
+        {
+          "name": "Created",
+          "caption": "Created",
+          "type": "datetime",
+          "width": "115px",
+          "hidden": true
+        },
+        {
+          "name": "CreatedBy",
+          "caption": "CreatedBy",
+          "width": "160px",
+          "hidden": true
+        },
+        {
+          "name": "Updated",
+          "caption": "Updated",
+          "type": "datetime",
+          "width": "115px",
+          "hidden": true
+        },
+        {
+          "name": "UpdatedBy",
+          "caption": "UpdatedBy",
+          "width": "160px",
+          "hidden": true
+        },
+        {
+          "name": "INTEGR_REC_GROUPREF",
+          "caption": "GroupRef",
+          "type": "uniqueidentifier",
+          "width": "225px",
+          "hidden": true,
+          "excludeFromFilter": true
+        },
+        {
+          "name": "INTEGR_REC_BATCHREF",
+          "caption": "BatchRef",
+          "type": "uniqueidentifier",
+          "width": "225px",
+          "hidden": true,
+          "excludeFromFilter": true
+        },
+        {
+          "name": "INTEGR_REC_STATUS",
+          "caption": "Import Status",
+          "distinct": true,
+          "width": "150px"
+        },
+        {
+          "name": "INTEGR_REC_ERROR",
+          "caption": "Import Message/Error/Warning",
+          "distinct": true,
+          "width": "300px",
+          "markup": "<span data-field='INTEGR_REC_ERROR'></span><span data-if='currentRow.INTEGR_REC_TRACE != null && currentRow.INTEGR_REC_TRACE.length > 0'><div class='float-right pr-1 cursor-pointer'><a data-target-action='JSON_VIEWER' data-target-field='INTEGR_REC_TRACE' title='Click to show trace'><i class='far fa-list' aria-hidden='true'></i></a></div></span>"
+        },
+        {
+          "name": "INTEGR_REC_TRACE",
+          "type": "string",
+          "render": false,
+          "excludeFromFilter": true,
+          "hidden": true
+        },
+        {
+          "name": "JsonRow",
+          "caption": "JsonRow",
+          "distinct": true,
+          "width": "100px",
+          "hidden": true
+        },
+        {
+          "name": "object_type",
+          "caption": "object_type",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "object_importedSourceId",
+          "caption": "object_importedSourceId",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "object_guid",
+          "caption": "object_guid",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "actualIssues",
+          "caption": "actualIssues",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "akerBpClassId",
+          "caption": "akerBpClassId",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "areaCode",
+          "caption": "areaCode",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "chain",
+          "caption": "chain",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "companyDistribution",
+          "caption": "companyDistribution",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "contractNumber",
+          "caption": "contractNumber",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "currentRevision",
+          "caption": "currentRevision",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "dfo",
+          "caption": "dfo",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "disciplineCode",
+          "caption": "disciplineCode",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "documentGroup",
+          "caption": "documentGroup",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DocExistsInDCS",
+          "excludeFromFilter": true,
+          "distinct": true,
+          "hidden": true,
+          "class": "bckground",
+          "xrender": false
+        },
+        {
+          "name": "documentNumber",
+          "caption": "documentNumber",
+          "markup": "<span data-if='currentRow.DocExistsInDCS == 1'><a data-attr='href:/dcs-documents-details?Domain=&lt%=DCS_Domain%&gt&DocID=&lt%=documentNumber%&gt' target='_blank'><span data-field='documentNumber'></span></a></span><span data-if='currentRow.DocExistsInDCS == 0' data-field='documentNumber'></span><div class='float-right pr-1 cursor-pointer'><a data-target-action='API_JSON_VIEWER' data-target-field='objectID' data-target-system='DTS IvarAasen-Aibel' data-target-endpointname='Documents' data-target-endpoint-type='REST' class='' title='Click to show raw response from source'><i class='far fa-cloud-download' aria-hidden='true'></i></a></div>",
+          "distinct": true,
+          "width": "100px",
+          "includeInGlobalSearch": true
+        },
+        {
+          "name": "documentStatus",
+          "caption": "documentStatus",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "documentTitle",
+          "caption": "documentTitle",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "documentTypeShortCode",
+          "caption": "documentTypeShortCode",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "facilityCode",
+          "caption": "facilityCode",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "forecastIssues",
+          "caption": "forecastIssues",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "originatingContractor",
+          "caption": "originatingContractor",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "originatorDocumentNumber",
+          "caption": "originatorDocumentNumber",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "otherCompanyDistributions",
+          "caption": "otherCompanyDistributions",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "packageNumber",
+          "caption": "packageNumber",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "plannedIssues",
+          "caption": "plannedIssues",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "plantCode",
+          "caption": "plantCode",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "processUnitCode",
+          "caption": "processUnitCode",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "progress",
+          "caption": "progress",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "purchaseOrderNumber",
+          "caption": "purchaseOrderNumber",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "remarks",
+          "caption": "remarks",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "restrictedReference",
+          "caption": "restrictedReference",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "reviewClass",
+          "caption": "reviewClass",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "safetyCriticalDocument",
+          "caption": "safetyCriticalDocument",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "supersededBy",
+          "caption": "supersededBy",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "supersedes",
+          "caption": "supersedes",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "thirdPartyVerificationDistributions",
+          "caption": "thirdPartyVerificationDistributions",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Area",
+          "caption": "DCS_Area",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Classification",
+          "caption": "DCS_Classification",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Comments",
+          "caption": "DCS_Comments",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Confidential",
+          "caption": "DCS_Confidential",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_ContractNo",
+          "caption": "DCS_ContractNo",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Criticality",
+          "caption": "DCS_Criticality",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Discipline",
+          "caption": "DCS_Discipline",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_DocumentGroup",
+          "caption": "DCS_DocumentGroup",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_DocumentID",
+          "caption": "DCS_DocumentID",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_DocumentType",
+          "caption": "DCS_DocumentType",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Domain",
+          "caption": "DCS_Domain",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_FacilityID",
+          "caption": "DCS_FacilityID",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Import_ExternalUniqueRef",
+          "caption": "DCS_Import_ExternalUniqueRef",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_OriginatorCompany",
+          "caption": "DCS_OriginatorCompany",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_PlantID",
+          "caption": "DCS_PlantID",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_PONumber",
+          "caption": "DCS_PONumber",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_ReviewClass",
+          "caption": "DCS_ReviewClass",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_System",
+          "caption": "DCS_System",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Title",
+          "caption": "DCS_Title",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_VoidedDate",
+          "caption": "DCS_VoidedDate",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "areaCode_CONCATENATED",
+          "caption": "areaCode_CONCATENATED",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "processUnitCode_FIRSTVALUE",
+          "caption": "processUnitCode_FIRSTVALUE",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "areaCode_FIRSTVALUE",
+          "caption": "areaCode_FIRSTVALUE",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_DFO",
+          "caption": "DCS_DFO",
+          "distinct": true,
+          "width": "100px"
+        }
+      ],
+      "quickFilters": [
+        {
+          "title": "<< title of first filter here >>",
+          "filter": "<< filterstring of first filter here >>"
+        }
+      ]
+    },
+    {
+      "id": "gridRevisions",
+      "title": "Revisions",
+      "description": "Current content of the import table for Revisions",
+      "tooltip": "Shows the current content of the import table for Revisions",
+      "view": "lviw_Import_DTS_DCS_Revisions",
+      "whereClause": "INTEGR_REC_GROUPREF='efd3449e-3a44-4c38-b0e7-f57ca48cf8b0'",
+      "mapIntegrRecStatusToImportStatus": true,
+      "includeInImportStatusPanel": true,
+      "includeInImportErrorsPanel": true,
+      "columns": [
+        {
+          "name": "PrimKey",
+          "caption": "PrimKey",
+          "type": "uniqueidentifier",
+          "width": "225px",
+          "hidden": true,
+          "excludeFromFilter": true
+        },
+        {
+          "name": "Created",
+          "caption": "Created",
+          "type": "datetime",
+          "width": "115px",
+          "hidden": true
+        },
+        {
+          "name": "CreatedBy",
+          "caption": "CreatedBy",
+          "width": "160px",
+          "hidden": true
+        },
+        {
+          "name": "Updated",
+          "caption": "Updated",
+          "type": "datetime",
+          "width": "115px",
+          "hidden": true
+        },
+        {
+          "name": "UpdatedBy",
+          "caption": "UpdatedBy",
+          "width": "160px",
+          "hidden": true
+        },
+        {
+          "name": "INTEGR_REC_GROUPREF",
+          "caption": "GroupRef",
+          "type": "uniqueidentifier",
+          "width": "225px",
+          "hidden": true,
+          "excludeFromFilter": true
+        },
+        {
+          "name": "INTEGR_REC_BATCHREF",
+          "caption": "BatchRef",
+          "type": "uniqueidentifier",
+          "width": "225px",
+          "hidden": true,
+          "excludeFromFilter": true
+        },
+        {
+          "name": "INTEGR_REC_STATUS",
+          "caption": "Import Status",
+          "distinct": true,
+          "width": "150px"
+        },
+        {
+          "name": "INTEGR_REC_ERROR",
+          "caption": "Import Message/Error/Warning",
+          "distinct": true,
+          "width": "300px",
+          "markup": "<span data-field='INTEGR_REC_ERROR'></span><span data-if='currentRow.INTEGR_REC_TRACE != null && currentRow.INTEGR_REC_TRACE.length > 0'><div class='float-right pr-1 cursor-pointer'><a data-target-action='JSON_VIEWER' data-target-field='INTEGR_REC_TRACE' title='Click to show trace'><i class='far fa-list' aria-hidden='true'></i></a></div></span>"
+        },
+        {
+          "name": "INTEGR_REC_TRACE",
+          "type": "string",
+          "render": false,
+          "excludeFromFilter": true,
+          "hidden": true
+        },
+        {
+          "name": "JsonRow",
+          "caption": "JsonRow",
+          "distinct": true,
+          "width": "100px",
+          "hidden": true
+        },
+        {
+          "name": "object_type",
+          "caption": "object_type",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "object_importedSourceId",
+          "caption": "object_importedSourceId",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "object_guid",
+          "caption": "object_guid",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "contractorReturnCode",
+          "caption": "contractorReturnCode",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "documentGuid",
+          "caption": "documentGuid",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DocExistsInDCS",
+          "excludeFromFilter": true,
+          "distinct": true,
+          "hidden": true,
+          "class": "bckground",
+          "xrender": false
+        },
+        {
+          "name": "documentNumber",
+          "caption": "documentNumber",
+          "markup": "<span data-if='currentRow.DocExistsInDCS == 1'><a data-attr='href:/dcs-documents-details?Domain=&lt%=DCS_Domain%&gt&DocID=&lt%=documentNumber%&gt' target='_blank'><span data-field='documentNumber'></span></a></span><span data-if='currentRow.DocExistsInDCS == 0' data-field='documentNumber'></span><div class='float-right pr-1 cursor-pointer'><a data-target-action='API_JSON_VIEWER' data-target-field='objectID' data-target-system='DTS IvarAasen-Aibel' data-target-endpointname='Documents' data-target-endpoint-type='REST' class='' title='Click to show raw response from source'><i class='far fa-cloud-download' aria-hidden='true'></i></a></div>",
+          "distinct": true,
+          "width": "150px",
+          "includeInGlobalSearch": true
+        },
+        {
+          "name": "proposedWorkflow",
+          "caption": "proposedWorkflow",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "reasonForIssue",
+          "caption": "reasonForIssue",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "reasonForIssueDescription",
+          "caption": "reasonForIssueDescription",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "revision",
+          "caption": "revision",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "revisionDate",
+          "caption": "revisionDate",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "revisionStatus",
+          "caption": "revisionStatus",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Comments",
+          "caption": "DCS_Comments",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_ContractorSupplierAcceptanceCode",
+          "caption": "DCS_ContractorSupplierAcceptanceCode",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_DocumentID",
+          "caption": "DCS_DocumentID",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Domain",
+          "caption": "DCS_Domain",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Import_ExternalUniqueRef",
+          "caption": "DCS_Import_ExternalUniqueRef",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Revision",
+          "caption": "DCS_Revision",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_RevisionDate",
+          "caption": "DCS_RevisionDate",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Step",
+          "caption": "DCS_Step",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_ReasonForIssue",
+          "caption": "DCS_ReasonForIssue",
+          "distinct": true,
+          "width": "100px"
+        }
+      ],
+      "quickFilters": [
+        {
+          "title": "<< title of first filter here >>",
+          "filter": "<< filterstring of first filter here >>"
+        }
+      ]
+    },
+    {
+      "id": "gridRevisionsFiles",
+      "title": "Revisions Files",
+      "description": "Current content of the import table for Revisions Files",
+      "tooltip": "Shows the current content of the import table for Revisions Files",
+      "view": "lviw_Import_DTS_DCS_RevisionsFiles",
+      "whereClause": "INTEGR_REC_GROUPREF='efd3449e-3a44-4c38-b0e7-f57ca48cf8b0'",
+      "mapIntegrRecStatusToImportStatus": true,
+      "includeInImportStatusPanel": true,
+      "includeInImportErrorsPanel": true,
+      "columns": [
+        {
+          "name": "PrimKey",
+          "caption": "PrimKey",
+          "type": "uniqueidentifier",
+          "width": "225px",
+          "hidden": true,
+          "excludeFromFilter": true
+        },
+        {
+          "name": "Created",
+          "caption": "Created",
+          "type": "datetime",
+          "width": "115px",
+          "hidden": true
+        },
+        {
+          "name": "CreatedBy",
+          "caption": "CreatedBy",
+          "width": "160px",
+          "hidden": true
+        },
+        {
+          "name": "Updated",
+          "caption": "Updated",
+          "type": "datetime",
+          "width": "115px",
+          "hidden": true
+        },
+        {
+          "name": "UpdatedBy",
+          "caption": "UpdatedBy",
+          "width": "160px",
+          "hidden": true
+        },
+        {
+          "name": "INTEGR_REC_GROUPREF",
+          "caption": "GroupRef",
+          "type": "uniqueidentifier",
+          "width": "225px",
+          "hidden": true,
+          "excludeFromFilter": true
+        },
+        {
+          "name": "INTEGR_REC_BATCHREF",
+          "caption": "BatchRef",
+          "type": "uniqueidentifier",
+          "width": "225px",
+          "hidden": true,
+          "excludeFromFilter": true
+        },
+        {
+          "name": "INTEGR_REC_STATUS",
+          "caption": "Import Status",
+          "distinct": true,
+          "width": "150px"
+        },
+        {
+          "name": "INTEGR_REC_ERROR",
+          "caption": "Import Message/Error/Warning",
+          "distinct": true,
+          "width": "300px",
+          "markup": "<span data-field='INTEGR_REC_ERROR'></span><span data-if='currentRow.INTEGR_REC_TRACE != null && currentRow.INTEGR_REC_TRACE.length > 0'><div class='float-right pr-1 cursor-pointer'><a data-target-action='JSON_VIEWER' data-target-field='INTEGR_REC_TRACE' title='Click to show trace'><i class='far fa-list' aria-hidden='true'></i></a></div></span>"
+        },
+        {
+          "name": "INTEGR_REC_TRACE",
+          "type": "string",
+          "render": false,
+          "excludeFromFilter": true,
+          "hidden": true
+        },
+        {
+          "name": "JsonRow",
+          "caption": "JsonRow",
+          "distinct": true,
+          "width": "100px",
+          "hidden": true
+        },
+        {
+          "name": "object_type",
+          "caption": "object_type",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "object_importedSourceId",
+          "caption": "object_importedSourceId",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "object_guid",
+          "caption": "object_guid",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "docRevisionGuid",
+          "caption": "docRevisionGuid",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DocExistsInDCS",
+          "excludeFromFilter": true,
+          "distinct": true,
+          "hidden": true,
+          "class": "bckground",
+          "xrender": false
+        },
+        {
+          "name": "documentNumber",
+          "caption": "documentNumber",
+          "markup": "<span data-if='currentRow.DocExistsInDCS == 1'><a data-attr='href:/dcs-documents-details?Domain=&lt%=DCS_Domain%&gt&DocID=&lt%=documentNumber%&gt' target='_blank'><span data-field='documentNumber'></span></a></span><span data-if='currentRow.DocExistsInDCS == 0' data-field='documentNumber'></span><div class='float-right pr-1 cursor-pointer'><a data-target-action='API_JSON_VIEWER' data-target-field='objectID' data-target-system='DTS IvarAasen-Aibel' data-target-endpointname='Documents' data-target-endpoint-type='REST' class='' title='Click to show raw response from source'><i class='far fa-cloud-download' aria-hidden='true'></i></a></div>",
+          "distinct": true,
+          "width": "100px",
+          "includeInGlobalSearch": true
+        },
+        {
+          "name": "fileComment",
+          "caption": "fileComment",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "fileName",
+          "caption": "fileName",
+          "distinct": true,
+          "markup": "<span data-if='currentRow.DCS_FileRef == null || currentRow.DCS_FileRef.length == 0'><span data-field='fileName'></span></span><span data-if='currentRow.DCS_FileRef != null && currentRow.DCS_FileRef.length > 0'><a class='cursor-pointer' data-target-action='FILE_DOWNLOAD' data-target-field='DCS_FileRef' title='Click to download file'><span data-field='fileName'></span></a></span>",
+          "width": "100px"
+        },
+        {
+          "name": "filePurpose",
+          "caption": "filePurpose",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "fileSequenceNumber",
+          "caption": "fileSequenceNumber",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "fileType",
+          "caption": "fileType",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "md5hash",
+          "caption": "md5hash",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "originalFilename",
+          "caption": "originalFilename",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "revision",
+          "caption": "revision",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_DocumentID",
+          "caption": "DCS_DocumentID",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Domain",
+          "caption": "DCS_Domain",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_FileName",
+          "caption": "DCS_FileName",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_FileRef",
+          "caption": "DCS_FileRef",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_FileSize",
+          "caption": "DCS_FileSize",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Import_ExternalUniqueRef",
+          "caption": "DCS_Import_ExternalUniqueRef",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_OriginalFileName",
+          "caption": "DCS_OriginalFileName",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_RevisionItemNo",
+          "caption": "DCS_RevisionItemNo",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_SortOrder",
+          "caption": "DCS_SortOrder",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Type",
+          "caption": "DCS_Type",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "IsResponseCommentSheetFile",
+          "caption": "IsResponseCommentSheetFile",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "DCS_Revision",
+          "caption": "DCS_Revision",
+          "distinct": true,
+          "width": "100px"
+        },
+        {
+          "name": "fileSize",
+          "caption": "fileSize",
+          "distinct": true,
+          "width": "100px"
+        }
+      ],
+      "quickFilters": [
+        {
+          "title": "<< title of first filter here >>",
+          "filter": "<< filterstring of first filter here >>"
+        }
+      ]
+    }
+  ]
+}
